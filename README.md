@@ -1,5 +1,8 @@
 # Poking around Bubble.io applications
 
+## are we deadass
+<img width="686" height="294" alt="Screenshot_20250919_200816" src="https://github.com/user-attachments/assets/2c90d306-403d-4acd-9733-cfb9a72ee168" />
+
 ## Disclaimer
 
 This repository contains a Python script for extracting data from Bubble.io applications. I'm not responsible for any misuse of this script. Use it at your own risk.
