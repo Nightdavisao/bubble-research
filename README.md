@@ -106,7 +106,7 @@ data = {
             # maybe can be omitted
             "search_path": "{\"constructor_name\":\"State\",\"args\":[{\"type\":\"json\",\"value\":\"%p3.bTGbC.%el.cnvDO2.%el.cntLz1.%el.cntRQ.%el.cntTS.%el.cntNC1.%s.0\"}]}",
             "situation": "initial search",
-            "n": 1000 # bubble truncates to 400 if higher than that
+            "n": 1000 # bubble truncates to 400
         }
     ]
 }
