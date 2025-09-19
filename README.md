@@ -87,7 +87,34 @@ This function uses PBKDF2 with MD5 as the hashing algorithm to derive a key and 
 
 It's not really supposed to be secure, since the key and IV are derived from values we can easily obtain (the app name and a random value). This is only a mild obfuscation.
 
-With the knowledge of how the encoding works, we can easily replicate this function and encode our own queries, and send them to the `msearch` endpoint to extract data from the database. You may ask, don't you still need the data types and structure of the database to be able to query it?
+With the knowledge of how the encoding works, we can easily replicate this function and encode our own queries, and send them to the `msearch` endpoint to extract data from the database.
+
+This is the query format that the `msearch` endpoint expects:
+
+```python
+data = {
+    "appname": appname,
+    "app_version": app_version,
+    "searches": [
+        {
+            "appname": appname,
+            "app_version": app_version,
+            "type": f"custom.{user_type}" if user_type != 'user' else user_type,
+            "constraints": [], # usually contains filters here, but we're ommitting it to get all the data
+            "sorts_list": [],
+            "from": offset,
+            # maybe can be omitted
+            "search_path": "{\"constructor_name\":\"State\",\"args\":[{\"type\":\"json\",\"value\":\"%p3.bTGbC.%el.cnvDO2.%el.cntLz1.%el.cntRQ.%el.cntTS.%el.cntNC1.%s.0\"}]}",
+            "situation": "initial search",
+            "n": 1000 # bubble truncates to 400 if higher than that
+        }
+    ]
+}
+```
+
+<sub>**Note**: You can only get up to 50k records this way, probably there's a workaround for this, but I'm not aiming to get everything from an app, just enough to prove the point.</sub>
+
+You may ask, don't you still need the data types and structure of the database to be able to query it?
 
 Yes, you do, but you can easily check them by just typing `window.app` in the browser console. If you inspect a little further in the HTML that the average Bubble.io app has, you'll see that there's a script that dynamically sets `window.app` to a JSON object that contains the data types and structure of the database.
 
